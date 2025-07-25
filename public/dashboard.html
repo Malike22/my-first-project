@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Attendance System - Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-left">
+                <i class="fas fa-graduation-cap"></i>
+                <h1>Smart Attendance System</h1>
+            </div>
+            <div class="header-right">
+                <div class="user-info">
+                    <i id="userRoleIcon" class="fas fa-user"></i>
+                    <span id="userName">Loading...</span>
+                    <span id="userRole" class="user-role"></span>
+                </div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="dashboard-nav">
+            <ul id="navMenu">
+                <!-- Navigation items will be populated by JavaScript based on role -->
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Overview Section -->
+            <section id="overviewSection" class="content-section active">
+                <h2><i class="fas fa-tachometer-alt"></i> Dashboard Overview</h2>
+                <div class="stats-grid" id="statsGrid">
+                    <!-- Stats cards will be populated by JavaScript -->
+                </div>
+                <div class="chart-container" id="chartContainer">
+                    <!-- Charts will be added here -->
+                </div>
+            </section>
+
+            <!-- Attendance Section -->
+            <section id="attendanceSection" class="content-section">
+                <h2><i class="fas fa-calendar-check"></i> Attendance Management</h2>
+                
+                <!-- Mark Attendance Form (Teacher/HOD/Principal only) -->
+                <div id="markAttendanceForm" class="form-container" style="display: none;">
+                    <h3>Mark Attendance</h3>
+                    <form id="attendanceForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="studentSelect">Student:</label>
+                                <select id="studentSelect" required>
+                                    <option value="">Select Student</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="subjectSelect">Subject:</label>
+                                <select id="subjectSelect" required>
+                                    <option value="">Select Subject</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="attendanceDate">Date:</label>
+                                <input type="date" id="attendanceDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="attendanceStatus">Status:</label>
+                                <select id="attendanceStatus" required>
+                                    <option value="">Select Status</option>
+                                    <option value="present">Present</option>
+                                    <option value="absent">Absent</option>
+                                    <option value="late">Late</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-check"></i> Mark Attendance
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Attendance Records -->
+                <div class="table-container">
+                    <h3>Attendance Records</h3>
+                    <div class="table-controls">
+                        <input type="text" id="attendanceSearch" placeholder="Search attendance records...">
+                        <select id="statusFilter">
+                            <option value="">All Status</option>
+                            <option value="present">Present</option>
+                            <option value="absent">Absent</option>
+                            <option value="late">Late</option>
+                        </select>
+                    </div>
+                    <table id="attendanceTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Student</th>
+                                <th>Roll Number</th>
+                                <th>Subject</th>
+                                <th>Status</th>
+                                <th>Marked By</th>
+                                <th class="actions-col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="attendanceTableBody">
+                            <!-- Attendance data will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Students Section -->
+            <section id="studentsSection" class="content-section">
+                <h2><i class="fas fa-users"></i> Student Management</h2>
+                
+                <!-- Add Student Form (HOD/Principal only) -->
+                <div id="addStudentForm" class="form-container" style="display: none;">
+                    <h3>Add New Student</h3>
+                    <form id="studentForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="rollNumber">Roll Number:</label>
+                                <input type="text" id="rollNumber" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="studentName">Name:</label>
+                                <input type="text" id="studentName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="department">Department:</label>
+                                <input type="text" id="department" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="year">Year:</label>
+                                <select id="year" required>
+                                    <option value="">Select Year</option>
+                                    <option value="1">1st Year</option>
+                                    <option value="2">2nd Year</option>
+                                    <option value="3">3rd Year</option>
+                                    <option value="4">4th Year</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" id="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone:</label>
+                                <input type="tel" id="phone">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Add Student
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Students Table -->
+                <div class="table-container">
+                    <div class="table-controls">
+                        <input type="text" id="studentSearch" placeholder="Search students...">
+                        <select id="departmentFilter">
+                            <option value="">All Departments</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Mechanical">Mechanical</option>
+                            <option value="Civil">Civil</option>
+                        </select>
+                    </div>
+                    <table id="studentsTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Roll Number</th>
+                                <th>Name</th>
+                                <th>Department</th>
+                                <th>Year</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th class="actions-col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentsTableBody">
+                            <!-- Student data will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Detained Students Section (HOD/Principal only) -->
+            <section id="detainedSection" class="content-section">
+                <h2><i class="fas fa-exclamation-triangle"></i> Detained Students</h2>
+                <div class="alert alert-warning">
+                    <i class="fas fa-info-circle"></i>
+                    Students with less than 75% attendance are listed below
+                </div>
+                <div class="table-container">
+                    <table id="detainedTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Roll Number</th>
+                                <th>Name</th>
+                                <th>Department</th>
+                                <th>Total Classes</th>
+                                <th>Present</th>
+                                <th>Attendance %</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="detainedTableBody">
+                            <!-- Detained student data will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Users Management Section (Principal only) -->
+            <section id="usersSection" class="content-section">
+                <h2><i class="fas fa-user-cog"></i> User Management</h2>
+                <div class="table-container">
+                    <table id="usersTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Name</th>
+                                <th>Role</th>
+                                <th>Department</th>
+                                <th>Email</th>
+                                <th class="actions-col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <!-- User data will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <span>Loading...</span>
+        </div>
+    </div>
+
+    <!-- Modal for editing -->
+    <div id="editModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Edit</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Modal content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
