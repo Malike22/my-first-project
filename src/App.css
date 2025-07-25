@@ -1,0 +1,262 @@
+/* App Component Styles */
+
+.app {
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Welcome Page Styles */
+.welcome-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.welcome-card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  width: 100%;
+  max-width: 600px;
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.welcome-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.welcome-header h1 {
+  color: #2d3748;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+}
+
+.welcome-header p {
+  color: #718096;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.user-info {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 32px;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.label {
+  font-weight: 600;
+  color: #4a5568;
+}
+
+.value {
+  color: #2d3748;
+  font-family: 'Monaco', 'Consolas', monospace;
+  background: #e2e8f0;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.welcome-actions {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.logout-button {
+  background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logout-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(229, 62, 62, 0.4);
+}
+
+.logout-button:active {
+  transform: translateY(0);
+}
+
+.demo-info {
+  background: #edf2f7;
+  border-left: 4px solid #667eea;
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.demo-info h3 {
+  color: #2d3748;
+  font-size: 1.25rem;
+  margin: 0 0 16px 0;
+}
+
+.demo-info p {
+  color: #4a5568;
+  line-height: 1.6;
+  margin: 0 0 16px 0;
+}
+
+.demo-info ul {
+  color: #4a5568;
+  line-height: 1.6;
+  margin: 0 0 16px 0;
+  padding-left: 20px;
+}
+
+.demo-info li {
+  margin-bottom: 8px;
+}
+
+.demo-info strong {
+  color: #2d3748;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .welcome-card {
+    padding: 24px;
+    margin: 10px;
+  }
+
+  .welcome-header h1 {
+    font-size: 2rem;
+  }
+
+  .info-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .value {
+    align-self: stretch;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-container {
+    padding: 16px;
+  }
+
+  .welcome-card {
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  .welcome-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .demo-info {
+    padding: 16px;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .welcome-container {
+    background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+  }
+
+  .welcome-card {
+    background: #2d3748;
+    color: #f7fafc;
+  }
+
+  .welcome-header h1 {
+    color: #f7fafc;
+  }
+
+  .welcome-header p {
+    color: #a0aec0;
+  }
+
+  .user-info {
+    background: #4a5568;
+  }
+
+  .info-item {
+    border-color: #718096;
+  }
+
+  .label {
+    color: #a0aec0;
+  }
+
+  .value {
+    color: #f7fafc;
+    background: #718096;
+  }
+
+  .demo-info {
+    background: #4a5568;
+    border-color: #667eea;
+  }
+
+  .demo-info h3 {
+    color: #f7fafc;
+  }
+
+  .demo-info p {
+    color: #a0aec0;
+  }
+
+  .demo-info ul {
+    color: #a0aec0;
+  }
+
+  .demo-info strong {
+    color: #f7fafc;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .welcome-card {
+    animation: none;
+  }
+
+  .logout-button {
+    transition: none;
+  }
+}
